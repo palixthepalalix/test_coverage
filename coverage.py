@@ -94,8 +94,6 @@ def main(argv):
     parser.add_argument('-w', '--stash-password', help='stash api password', required=True)
     args = parser.parse_args(argv)
     stash_api = StashApi(args.stash_api, args.stash_user, args.stash_password)
-    with open(args.clover_xml, 'r+') as f:
-        coverage_xml = etree.fromstring(f.read())
     stash_repo_diff = stash_api.get_pull_request_info(args.stash_project, args.repo_name, args.pr_id)
     c = CoverageReporter(stash_repo_diff, args.clover_xml, args.base_repo_path)
     print c
